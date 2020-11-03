@@ -26,12 +26,44 @@
 #WRAP > p {
   text-align: center;
   white-space: nowrap;
+  margin-top: 10px;
+}
+
+#WRAP > p.alert {
+  white-space: normal;
+  color: rgb(253, 39, 39);
+  background: rgba(255,255,255,0.3);
+  font-size: 0.8em;
+  margin-top: 5px;
+  box-sizing: border-box;
+  display: none;
+}
+
+#WRAP > p.alert::before {
+  content: '!';
+  display: inline-block;
+  position: relative;
+  top: 50%;
+  /* transform: translateY(-50%); */
+  width: 14px;
+  height: 14px;
+  border-radius: 14px;
+  line-height: 16px;
+  background: rgb(253,39,39);
+  color: #fff;
+  margin-right: 3px;
 }
 
 #WRAP > p > label {
   font-size: 0.9em;
   font-weight: bolder;
-  margin-right: 10px;
+  /* margin-right: 10px; */
+}
+
+#WRAP > p > label::after {
+  content: '#';
+  display: inline-block;
+  margin-left: 10px;
 }
 
 #WRAP > p > input[type='text'] {
