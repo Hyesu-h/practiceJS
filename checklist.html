@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/checklist.css">
+  <script src="js/checklist.js" defer></script>
+  <title>Check List</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Check Check</h1>
+      <button id="EDIT_BTN">Edit</button>
+    </nav>
+  </header>
+
+  <main>
+    <ul>
+      <li>
+        <input type="checkbox" id="LIST_01"/><label for="LIST_01">할 일</label>
+        <button class="delete_btn"><img src="images/icon_trash.png" alt="delete button"/></button>
+      </li>
+      <li>
+        <input type="checkbox" id="LIST_02" checked/><label for="LIST_02">끝난 일</label>
+        <button class="delete_btn"><img src="images/icon_trash.png" alt="delete button"/></button>
+      </li>
+    </ul>
+  </main>
+
+  <footer>
+    <input type="text" id="LIST_ADD"/>
+    <button id="ADD_BTN"></button>
+  </footer>
+</body>
+</html>
