@@ -42,7 +42,7 @@ function createList(text, id) {
   list_box.appendChild(li);
 
   input_list.value = '';
-  input_list.focus;
+  input_list.focus();
 }
 
 // html, array에서 삭제
