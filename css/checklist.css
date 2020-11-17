@@ -19,6 +19,7 @@ header {
   height: 50px;
   text-align: center;
   border-bottom: 1px solid #606060;
+  box-sizing: border-box;
 }
 
 header > nav {
@@ -35,21 +36,15 @@ header > nav > h1 {
   line-height: 50px;
 }
 
-header > nav > button {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none; 
-  outline: none;
-  font-size: 1.0rem;
-}
-
 /* main -> list & checkbox style */
 
 main {
+  height: calc(100% - 120px);
+  overflow-y: auto;
+}
 
+main::-webkit-scrollbar {
+  display: none;
 }
 
 main > ul {
@@ -127,16 +122,15 @@ main > ul > li > button.delete_btn {
   right: 0;
   width: 60px;
   height: 100%;
-  /* transform: translateX(60px); */
-  background: transparent;
+  background-color: transparent;
+  background: url('../images/icon_trash.png') no-repeat center center;
   border: none;
-  /* border-left: 1px solid #606060; */
   outline: none;
 }
 
-main > ul > li > button.delete_btn > img {
+/* main > ul > li > button.delete_btn > img {
   height: 80%;
-}
+} */
 
 /* footer -> add btn style */
 

@@ -4,22 +4,26 @@
 const list_box = document.querySelector('#LIST_WRAP');
 const input_list = document.querySelector('#INPUT_LIST');
 const add_btn = document.querySelector('#ADD_BTN');
-// const edit_btn = document.querySelector('#EDIT_BTN');
 const delete_btn = document.querySelectorAll('.delete_btn');
 
 // list array
 const list_arr = new Array();
 
+let num = 0;
+
 // 입력된 아이템을 array에 저장
 function saveItems(text) {
-  let list_obj = { name: text, id: `ITEM_${list_arr.length}` };
+  let list_obj = { no: num, name: text };
   list_arr.push(list_obj);
+  localStorage[num] = text;
+  num++;
   return list_arr;
 }
 
 // 입력된 아이템 html 태그로 만들기
 function createList(text, id) {
   const li = document.createElement('li');
+  li.setAttribute('data-item', id);
 
   const input_chkbox = document.createElement('input');
   input_chkbox.setAttribute('type', 'checkbox');
@@ -30,10 +34,7 @@ function createList(text, id) {
   label.innerText = text;
 
   const del_btn = document.createElement('button');
-  del_btn.innerHTML = '<img src="images/icon_trash.png" alt="delete button"/>';
   del_btn.setAttribute('class','delete_btn');
-
-  del_btn.addEventListener('click',deleteItem);
 
   li.appendChild(input_chkbox);
   li.appendChild(label);
@@ -41,59 +42,55 @@ function createList(text, id) {
 
   list_box.appendChild(li);
 
+  li.scrollIntoView({block: 'center'});
+
+  return list_box;
+}
+
+function paintHTML(arr_num) {
+  const text = input_list.value;
+  if( text === '' ) {
+    alert('추가하고자 하는 아이템을 입력해주세요!');
+    input_list.focus();
+    return;
+  } else {
+    saveItems(text);
+    createList(list_arr[arr_num].name, `ITEM_${list_arr[arr_num].no}`);
+  };
+
   input_list.value = '';
   input_list.focus();
 }
 
-// html, array에서 삭제
-function deleteItem(btn) {
-  let del_btn = btn.target.parentNode;
-  let item_id = del_btn.previousSibling.getAttribute('for');
-  let list_num = item_id.split('_');
-  list_box.removeChild(del_btn.parentNode);
-  list_arr.splice(list_num[1],1);
-  // console.log('delete',list_arr);
-  return list_arr;
-}
-
 add_btn.addEventListener('click', () => {
-  const current_value = input_list.value;
   let index = list_arr.length;
-  saveItems(current_value);
-  createList(list_arr[index].name,list_arr[index].id);
+  paintHTML(index);
+  // console.log('add',list_arr);
 });
 
 input_list.addEventListener('keyup', (event) => {
   if( event.keyCode === 13 ) {
-    const current_value = input_list.value;
     let index = list_arr.length;
-    saveItems(current_value);
-    createList(list_arr[index].name,list_arr[index].id);
+    paintHTML(index);
     // console.log('add',list_arr);
   }
 });
 
-// edit click -> delete btn show & hide
-// 나중에 추가해보기
-// let del_state = false;
-// edit_btn.addEventListener('click', () => {
-//   const delete_btn = document.querySelectorAll('.delete_btn');
-//   if( !del_state ) {
-//     delete_btn.forEach((del,index) => {
-//       del.style.transform = 'translateX(0)';
-//       del.style.transition = 'all 0.3s';
+// delete item from the list_box & list_arr
+list_box.addEventListener('click', (event) => {
+  
+  let target_li = event.target.parentNode;
 
-//       del.addEventListener('click', () => {
-//         deleteItem(del);
-//       })
-//     });
-//     edit_btn.innerText = 'DONE';
-//     del_state = true;
-//   } else {
-//     delete_btn.forEach((del,index) => {
-//       del.style.transform = 'translateX(60px)';
-//     });
-//     edit_btn.innerText = 'EDIT';
-//     del_state = false;
-//   }
-// });
+  if( event.target.tagName === 'BUTTON' ) {
+    event.currentTarget.removeChild(target_li);
+    console.log(target_li)
+    
+    const data_item = target_li.getAttribute('data-item');
+    const list_num = data_item.split('_');
+    const itemToFind = list_arr.find(function(item) {return item.no == list_num[1]});
+    const index = list_arr.indexOf(itemToFind);
+    if (index > -1) list_arr.splice(index, 1);
+  }
+  // console.log('delete',list_arr);
+  return list_arr;
+});
