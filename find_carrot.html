@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/reset.css"/>
+  <script src="js/find_carrot.js" defer></script>
+  <title>Find Carrots!</title>
+  <style>
+    main {
+      position: relative;
+      height: 100%;
+      background: url('./images/carrot/img/background.png') no-repeat center center;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    main > .control_area {
+      text-align: center;
+      padding-top: 30px;
+      transform: translateX(-30px);
+    }
+
+    main > .control_area > #CLOCK {
+      display: inline-block;
+      width: 100px;
+      height: 40px;
+      border-radius: 10px;
+      border: 3px solid #000;
+      background: #fff;
+      font-size: 30px;
+      line-height: 40px;
+      vertical-align: middle;
+    }
+
+    main > .control_area > button {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      background: rgb(240, 232, 188);
+      border: 3px solid #000;
+      cursor: pointer;
+      box-sizing: border-box;
+      margin: 0 30px;
+      vertical-align: middle;
+    }
+
+    main > .control_area > #COUNT {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      border: 3px solid #000;
+      background: rgb(255, 98, 50);
+      color: #fff;
+      font-size: 30px;
+      line-height: 40px;
+      vertical-align: middle;
+    }
+
+    main > .game_area {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+    }
+
+    main > .game_area > span {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="control_area">
+      <div id="CLOCK">00:00</div>
+      <button id="PLAY_BTN"><img src="https://img.icons8.com/fluent-systems-filled/24/000000/play.png" alt="play"/></button>
+      <div id="COUNT">0</div>
+    </div>
+    <div class="game_area">
+      <span class="carrot"><img src="images/carrot/img/carrot.png" alt=""></span>
+      <span class="carrot"><img src="images/carrot/img/bug.png" alt=""></span>
+    </div>
+  </main>
+</body>
+</html>
